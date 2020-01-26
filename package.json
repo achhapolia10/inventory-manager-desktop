@@ -1,0 +1,19 @@
+{
+  "name": "electron-hello-world",
+  "version": "1.0.0",
+  "description": "Project to learn electron.js",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "author": "Anshuman Chhapolia",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^7.1.9",
+    "electron-packager": "^14.2.0"
+  },
+  "dependencies": {
+    "electron-winstaller": "^4.0.0"
+  }
+}

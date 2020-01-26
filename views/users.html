@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="http://localhost:4001/public/js/jquery-3.4.1.min.js"></script>
+    <script src="http://localhost:4001/public/js/bootstrap.min.js"></script>
+    <script src="http://localhost:4001/public/js/tooltip.min.js"></script>
+    <script src="http://localhost:4001/public/js/users.js"></script>
+    <link rel="stylesheet" href="http://localhost:4001/public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://localhost:4001/public/css/stock.css">
+    <script>if (window.module) module = window.module;</script>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Stock</title>
+</head>
+<body>
+<br/>
+<br/>
+
+<div class="container">
+            <br>
+        <div class="row">
+            <a href ="users/new"><button class="btn btn-success">New User</button></a>
+        </div>
+            <br>
+        <div class= "row">
+            
+            <h2>Admins</h2>
+            </div>
+            <div class="row">
+            <table class= "table">
+                <thead>
+                    <tr>
+                        <td scope="col">Username</td>
+                        <td scope="col">Change Password</td>
+                        <td scope="col">Remove</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{range .Users}}
+                    {{if eq .Admin 1}}
+                    <tr>
+                        <td>{{.Username}}</td>
+                        <td><a href="/users/edit?username={{.Username}}"><button class="btn btn-warning">Change</button></a></td>
+                        <td><button class="btn btn-danger" type="button" data-toggle="modal"
+                        data-target="#deleteModal" data-id={{.ID}} data-name="{{.Username}}">Remove</button></td>
+                    </tr>
+                    {{end}}
+                    {{end}}
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <h2>Users</h2>
+        </div>
+        <div class="row">
+            <table class= "table">
+                <thead>
+                    <tr>
+                        <td scope="col">Username</td>
+                        <td scope="col">Change Password</td>
+                        <td scope="col">Remove</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{range .Users}}
+                    {{if ne .Admin 1}}
+                     <tr>
+                        <td>{{.Username}}</td>
+                        <td><a href="/users/edit?username="{{.Username}}><button class="btn btn-warning">Change</button></a></td>
+                        <td><button class="btn btn-danger" type="button" data-toggle="modal"
+                        data-target="#deleteModal" data-id={{.ID}} data-name="{{.Username}}">Remove</button></td>
+                    </tr>
+                    {{end}}
+                    {{end}}
+                </tbody>
+            </table>
+        </div>
+
+    
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="delteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        Do you want to delete <b><span id="deleteModal"></span>?</b>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        <a id="deleteAnchor"><button type="button" id="deleteButton" class="btn btn-success">Delete</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+ 
+  $('#deleteModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var id = button.data('id')
+  var name = button.data('name') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  modal.find('#deleteModal').text(name)
+  document.getElementById("deleteAnchor").setAttribute("href","/users/delete?username="+name)
+})
+
+</script>
+</body>

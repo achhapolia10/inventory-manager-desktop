@@ -1,0 +1,8 @@
+node_modules/
+*.imdb
+*.exe
+imanager*
+inventory-win32-ia32/
+package-lock.json/
+test.js
+.idea/
