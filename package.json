@@ -10,7 +10,7 @@
   "author": "Anshuman Chhapolia",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^18.3.7",
+    "electron": "^22.3.25",
     "electron-packager": "^14.2.0"
   },
   "dependencies": {
